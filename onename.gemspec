@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Onename::VERSION
   spec.authors       = ["Larry Salibra"]
   spec.email         = ["larry@pay4bugs.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Ruby library for the OneName distributed identity system"
+  spec.summary       = spec.description
   spec.homepage      = "https://github.com/pay4bugs/onename-ruby"
   spec.license       = "MIT"
 
