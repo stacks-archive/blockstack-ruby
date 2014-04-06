@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.onename.io/larry.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - onename-ruby 0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 06 Apr 2014 14:00:02 GMT
+      Server:
+      - gunicorn/18.0
+      Strict-Transport-Security:
+      - max-age=31536000
+      Content-Length:
+      - '909'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"bitcoin\": {\n    \"address\": \"143xFrxppUD9oQE7mGvQFe23h814YorMBs\"\n
+        \ }, \n  \"avatar\": {\n    \"url\": \"http://www.larrysalibra.com/images/custom/larry.png\"\n
+        \ }, \n  \"facebook\": {\n    \"username\": \"larry.salibra\"\n  }, \n  \"cover\":
+        {\n    \"url\": \"http://www.larrysalibra.com/images/custom/home_bg.png\"\n
+        \ }, \n  \"instagram\": {\n    \"username\": \"larrysalibra\"\n  }, \n  \"location\":
+        {\n    \"formatted\": \"Hong Kong\"\n  }, \n  \"linkedin\": {\n    \"url\":
+        \"http://www.linkedin.com/in/larrysalibra\"\n  }, \n  \"github\": {\n    \"username\":
+        \"larrysalibra\"\n  }, \n  \"v\": \"0.2\", \n  \"twitter\": {\n    \"username\":
+        \"larrysalibra\"\n  }, \n  \"bio\": \"Founder/CEO Pay4Bugs\", \n  \"website\":
+        \"http://www.larrysalibra.com\", \n  \"angellist\": {\n    \"username\": \"larry-salibra\"\n
+        \ }, \n  \"pgp\": {\n    \"url\": \"https://keybase.io/larry/key.asc\", \n
+        \   \"fingerprint\": \"B516CB7A08819697B25E4694DE3B5425164C4849\"\n  }, \n
+        \ \"name\": {\n    \"formatted\": \"Larry Salibra\"\n  }\n}"
+    http_version: 
+  recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
+recorded_with: VCR 2.9.0
