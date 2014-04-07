@@ -44,10 +44,10 @@ module Onename
   def self.get_json(onename) 
     
     uri = URI(self.endpoint + "/#{onename.downcase}.json")
-    https = Net::HTTP.new(uri.host,uri.port)
-    https.use_ssl = true
+    http = Net::HTTP.new(uri.host,uri.port)
+    http.use_ssl = uri.scheme == "https" ? true : false
     req = Net::HTTP::Get.new(uri.path, {'User-Agent' => USERAGENT})
-    res = https.request(req)
+    res = http.request(req)
     case res.code
       when 404 then raise NameError.new("User with OneName \"#{onename}\" does not exist")
       when res.code != 200 then
