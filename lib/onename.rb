@@ -42,7 +42,7 @@ module Onename
   ##
   # Retrieve JSON data stored in OneName record
   def self.get_json(onename) 
-    
+    raise ArgumentError.new("#{onename} is not a valid OneName") if !self.valid?(onename)
     uri = URI(self.endpoint + "/#{onename.downcase}.json")
     http = Net::HTTP.new(uri.host,uri.port)
     http.use_ssl = uri.scheme == "https" ? true : false
