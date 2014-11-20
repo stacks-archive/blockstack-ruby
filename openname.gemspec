@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Larry Salibra"]
   spec.email         = ["larry@pay4bugs.com"]
   spec.description   = "Ruby library for the Openname distributed identity & naming system"
-  spec.summary       = spec.description
+  spec.summary       = "Library for  Openname"
   spec.homepage      = "https://github.com/pay4bugs/openname-ruby"
   spec.license       = "MIT"
 
