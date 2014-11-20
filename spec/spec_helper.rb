@@ -1,4 +1,4 @@
-require 'onename'
+require 'openname'
 require 'vcr'
 
 VCR.configure do |c|

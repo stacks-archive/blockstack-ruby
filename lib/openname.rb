@@ -1,17 +1,17 @@
-require "onename/version"
+require "openname/version"
 require 'net/http'
 require 'json'
 
 
 ##
-# A toolkit for the OneName distributed identity system
-module Onename
+# A toolkit for the Openname distributed identity & naming system 
+module Openname
   DEFAULT_ENDPOINT = "https://www.onename.io" 
   SCHEMA_VERSION = "0.2"
-  USERAGENT = "onename-ruby #{VERSION}"
+  USERAGENT = "openname-ruby #{VERSION}"
   
-  # https://github.com/onenameio/onename#usernames 
-  ONENAME_REGEX = /^[a-z0-9_]{1,60}$/
+  # https://github.com/openname/openname-specifications#usernames
+  OPENNAME_REGEX = /^[a-z0-9_]{1,60}$/
   
   @@endpoint = nil
 
@@ -33,44 +33,44 @@ module Onename
   end
 
   ##
-  # Check if the given +onename+ is in proper format
+  # Check if the given +openname+ is in proper format
   # Does not downcase input
-  def self.valid?(onename)
-    Onename::ONENAME_REGEX.match(onename).nil? ? false : true
+  def self.valid?(openname)
+    Openname::ONENAME_REGEX.match(openname).nil? ? false : true
   end
 
   ##
-  # Retrieve JSON data stored in OneName record
-  def self.get_json(onename) 
-    raise ArgumentError.new("#{onename} is not a valid OneName") if !self.valid?(onename)
-    uri = URI(self.endpoint + "/#{onename.downcase}.json")
+  # Retrieve JSON data stored in Openname record
+  def self.get_json(openname) 
+    raise ArgumentError.new("#{openname} is not a valid Openname") if !self.valid?(openname)
+    uri = URI(self.endpoint + "/#{openname.downcase}.json")
     http = Net::HTTP.new(uri.host,uri.port)
     http.use_ssl = uri.scheme == "https" ? true : false
     req = Net::HTTP::Get.new(uri.path, {'User-Agent' => USERAGENT})
     res = http.request(req)
     case res.code
-      when 404 then raise NameError.new("User with OneName \"#{onename}\" does not exist")
+      when 404 then raise NameError.new("User with Openname \"#{openname}\" does not exist")
       when res.code != 200 then
         error = JSON.parse(res.body)
-        raise RuntimeError.new("OneName endpoint returned error: #{error["error"]}")
+        raise RuntimeError.new("Openname endpoint returned error: #{error["error"]}")
     end  
     json = JSON.parse(res.body)
     
   end
   
   ##
-  # Return a +User+ representing the given onename
-  def self.get(onename)
-    User.from_json(self.get_json(onename),onename)
+  # Return a +User+ representing the given openname
+  def self.get(openname)
+    User.from_json(self.get_json(openname),openname)
   end
   
   
   class User
-    def self.from_json(json,onename)
-      User.new(json,onename)
+    def self.from_json(json,openname)
+      User.new(json,openname)
     end
     
-    attr_reader :onename
+    attr_reader :openname
     attr_reader :name_formatted
     attr_reader :avatar_url
     attr_reader :cover_url
@@ -90,8 +90,8 @@ module Onename
     attr_reader :schema_version
     
        
-    def initialize(json,onename)
-      @onename = onename
+    def initialize(json,openname)
+      @openname = openname
       @name_formatted = json["name"]["formatted"] if json["name"]
       @avatar_url = json["avatar"]["url"] if json["avatar"]
       @cover_url = json["cover"]["url"] if json["cover"]
@@ -148,7 +148,7 @@ module Onename
   
   def self.check_schema_version(json_result)
     if json_result["v"] != SCHEMA_VERSION
-      warn "Onename gem only supports OneName schema version #{SCHEMA_VERSION}"
+      warn "Openname gem only supports Openname schema version #{SCHEMA_VERSION}"
     end
   end
 

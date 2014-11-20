@@ -1,12 +1,12 @@
-# Onename
+# Openname
 
-A ruby library for the OneName distributed identity system
+A ruby library for the Openname distributed identity & naming system
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'onename'
+    gem 'openname'
 
 And then execute:
 
@@ -14,13 +14,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install onename
+    $ gem install openname
 
 ## Usage
 
  ```
- require "onename"
- user = Onename.get("larry")
+ require "openname"
+ user = Openname.get("larry")
  
  larrys_bitcoin_address = user.bitcoin_address
  larrys_website = user.website

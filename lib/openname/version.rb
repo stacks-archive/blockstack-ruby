@@ -1,3 +1,3 @@
-module Onename
+module Openname
   VERSION = "0.2"
 end

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'onename/version'
+require 'openname/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "onename"
-  spec.version       = Onename::VERSION
+  spec.name          = "openname"
+  spec.version       = Openname::VERSION
   spec.authors       = ["Larry Salibra"]
   spec.email         = ["larry@pay4bugs.com"]
-  spec.description   = "Ruby library for the OneName distributed identity system"
+  spec.description   = "Ruby library for the Openname distributed identity & naming system"
   spec.summary       = spec.description
-  spec.homepage      = "https://github.com/pay4bugs/onename-ruby"
+  spec.homepage      = "https://github.com/pay4bugs/openname-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
