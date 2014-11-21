@@ -25,6 +25,18 @@ Or install it yourself as:
  larrys_bitcoin_address = user.bitcoin_address
  larrys_website = user.website
  ```
+ 
+Convenience method `git_bitcoin_address` can be used for retrieving Bitcoin addresses.  If you give it a Bitcoin address it will return the same Bitcoin address; if you give it an Openname it will return the Openname user's Bitcoin address. Useful for allowing end users to either directly specify a Bitcoin address or provide a Openname in the same input field. 
+
+```
+ require "openname"
+ 
+ larrys_bitcoin_address = Openname.get_bitcoin_address("larry")
+ 
+ an_address = "143xFrxppUD9oQE7mGvQFe23h814YorMBs
+ an_address == Openname.get_bitcoin_address("143xFrxppUD9oQE7mGvQFe23h814YorMBs") # evaluates to true
+
+ ```
 
 ## Contributing
 
