@@ -1,6 +1,7 @@
 require "openname/version"
 require 'net/http'
 require 'json'
+require 'bitcoin'
 
 
 ##
@@ -36,7 +37,7 @@ module Openname
   # Check if the given +openname+ is in proper format
   # Does not downcase input
   def self.valid?(openname)
-    Openname::ONENAME_REGEX.match(openname).nil? ? false : true
+    Openname::OPENNAME_REGEX.match(openname).nil? ? false : true
   end
 
   ##
@@ -48,13 +49,13 @@ module Openname
     http.use_ssl = uri.scheme == "https" ? true : false
     req = Net::HTTP::Get.new(uri.path, {'User-Agent' => USERAGENT})
     res = http.request(req)
-    case res.code
-      when 404 then raise NameError.new("User with Openname \"#{openname}\" does not exist")
-      when res.code != 200 then
+    case res.code.to_s
+      when "404" then raise NameError.new("User with Openname \"#{openname}\" does not exist")
+      when "200" then return JSON.parse(res.body)
+	  else
         error = JSON.parse(res.body)
         raise RuntimeError.new("Openname endpoint returned error: #{error["error"]}")
     end  
-    json = JSON.parse(res.body)
     
   end
   
@@ -64,6 +65,16 @@ module Openname
     User.from_json(self.get_json(openname),openname)
   end
   
+  ##
+  # Takes either a bitcoin address or a openname
+  # Returns the bitcoin address associated with the openname or passes through address provided
+  def self.get_bitcoin_address(openname_or_address)
+	 return openname_or_address if Bitcoin.valid_address?(openname_or_address)
+	 raise ArgumentError.new("#{openname_or_address} is not a valid Openname or Bitcoin address") if !self.valid?(openname_or_address)
+	 user = get(openname_or_address)
+	 raise NameError.new("Openname user #{openname_or_address} does not have a Bitcoin address") if !Bitcoin.valid_address?(user.bitcoin_address)
+	 return user.bitcoin_address  
+  end
   
   class User
     def self.from_json(json,openname)

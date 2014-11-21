@@ -47,4 +47,76 @@ http_interactions:
         \ \"name\": {\n    \"formatted\": \"Larry Salibra\"\n  }\n}"
     http_version: 
   recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
+- request:
+    method: get
+    uri: https://www.onename.io/bitcoinhater.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - onename-ruby 0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 06 Apr 2014 14:00:02 GMT
+      Server:
+      - gunicorn/18.0
+      Strict-Transport-Security:
+      - max-age=31536000
+      Content-Length:
+      - '909'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n \n  \"avatar\": {\n    \"url\": \"http://www.example.com/pic.png\"\n
+        \ }, \n
+        \ \"name\": {\n    \"formatted\": \"Bitcoin Hater\"\n  }\n}"
+    http_version: 
+  recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
+- request:
+    method: get
+    uri: https://www.onename.io/nothere.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - onename-ruby 0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 404
+      message: NOT FOUND
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 06 Apr 2014 14:00:02 GMT
+      Server:
+      - gunicorn/18.0
+      Strict-Transport-Security:
+      - max-age=31536000
+      Content-Length:
+      - '909'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ""
+    http_version: 
+  recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
 recorded_with: VCR 2.9.0
