@@ -127,7 +127,7 @@ module Openname
       @bitmessage_address = json["bitmessage"]["username"] if json["bitmessage"]
       @bitcoinotc_username = json["bitcoinotc"]["username"] if json["bitcoinotc"]
       @pgp_fingerprint = json["pgp"]["fingerprint"] if json["pgp"]
-      @pgp_url = json["pgp"]["url"] if json["pgp"]["url"]
+      @pgp_url = json["pgp"]["url"] if json["pgp"]
       @schema_version = json["v"]
       @orgs = parse_orgs(json["orgs"])
     end
