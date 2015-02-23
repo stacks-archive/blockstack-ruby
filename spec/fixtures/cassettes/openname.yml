@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.onename.io/larry.json
+    uri: https://onename.io/larry.json
     body:
       encoding: US-ASCII
       string: ''
@@ -12,7 +12,7 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - '*/*'
+      - "*/*"
   response:
     status:
       code: 200
@@ -59,7 +59,7 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - '*/*'
+      - "*/*"
   response:
     status:
       code: 200
@@ -80,8 +80,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{\n \n  \"avatar\": {\n    \"url\": \"http://www.example.com/pic.png\"\n
-        \ }, \n
-        \ \"name\": {\n    \"formatted\": \"Bitcoin Hater\"\n  }\n}"
+        \ }, \n  \"name\": {\n    \"formatted\": \"Bitcoin Hater\"\n  }\n}"
     http_version: 
   recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
 - request:
@@ -96,7 +95,7 @@ http_interactions:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - '*/*'
+      - "*/*"
   response:
     status:
       code: 404
@@ -116,7 +115,369 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: ""
+      string: ''
     http_version: 
   recorded_at: Sun, 06 Apr 2014 14:00:02 GMT
+- request:
+    method: get
+    uri: https://onename.com/larry.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - gunicorn/18.0
+      Date:
+      - Sun, 22 Feb 2015 11:58:29 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1231'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - HEAD, GET
+      Access-Control-Max-Age:
+      - '21600'
+      Access-Control-Allow-Headers:
+      - X-REQUESTED-WITH, ACCEPT, CONTENT-TYPE, X-HTTP-METHOD-OVERRIDE, ORIGIN, PRAGMA,
+        REFERER, USER-AGENT, IF-MATCH, IF-NONE-MATCH
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - session=eyJfaWQiOnsiIGIiOiJOV1JtTVRRd1kyUTJaRGRoWmpJMllXWmxZVEV5TmpnMU1UQXhaRGt4WWpjPSJ9fQ.B8tV5Q.WycKK9I2qwgsYDiv3Z-A4F2YOhI;
+        HttpOnly; Path=/
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: "{\n  \"name\": {\n    \"formatted\": \"Larry Salibra\"\n  }, \n  \"location\":
+        {\n    \"formatted\": \"Hong Kong\"\n  }, \n  \"avatar\": {\n    \"url\":
+        \"https://s3.amazonaws.com/kd4/larry\"\n  }, \n  \"graph\": {\n    \"url\":
+        \"https://s3.amazonaws.com/grph/larry\"\n  }, \n  \"pgp\": {\n    \"fingerprint\":
+        \"B516CB7A08819697B25E4694DE3B5425164C4849\", \n    \"url\": \"https://s3.amazonaws.com/pk9/larry\"\n
+        \ }, \n  \"facebook\": {\n    \"username\": \"larry.salibra\", \n    \"proof\":
+        {\n      \"url\": \"https://facebook.com/larry.salibra/posts/947870672453\"\n
+        \   }\n  }, \n  \"v\": \"0.2\", \n  \"linkedin\": {\n    \"url\": \"http://www.linkedin.com/in/larrysalibra\"\n
+        \ }, \n  \"cover\": {\n    \"url\": \"https://s3.amazonaws.com/dx3/larry\"\n
+        \ }, \n  \"bio\": \"Founder & CEO Pay4Bugs\", \n  \"github\": {\n    \"username\":
+        \"larrysalibra\", \n    \"proof\": {\n      \"url\": \"https://gist.github.com/larrysalibra/510cc3fe4386f811b5bf\"\n
+        \   }\n  }, \n  \"twitter\": {\n    \"username\": \"larrysalibra\", \n    \"proof\":
+        {\n      \"url\": \"https://twitter.com/larrysalibra/status/492049735935459328\"\n
+        \   }\n  }, \n  \"instagram\": {\n    \"username\": \"larrysalibra\"\n  },
+        \n  \"angellist\": {\n    \"username\": \"larry-salibra\"\n  }, \n  \"website\":
+        \"https://www.larrysalibra.com\", \n  \"bitcoin\": {\n    \"address\": \"1Q7zdhtkSMQp6Mp5ooyWyJgoXSLiApnmVT\"\n
+        \ }\n}"
+    http_version: 
+  recorded_at: Sun, 22 Feb 2015 11:58:29 GMT
+- request:
+    method: get
+    uri: https://onename.com/nothere.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sun, 22 Feb 2015 11:58:30 GMT
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '134'
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: "<html>\n  <head>\n    <title>Internal Server Error</title>\n  </head>\n
+        \ <body>\n    <h1>Internal Server Error</h1>\n    \n  </body>\n</html>\n"
+    http_version: 
+  recorded_at: Sun, 22 Feb 2015 11:58:31 GMT
+- request:
+    method: get
+    uri: https://onename.com/bitcoinhater.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sun, 22 Feb 2015 11:58:32 GMT
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '134'
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: "<html>\n  <head>\n    <title>Internal Server Error</title>\n  </head>\n
+        \ <body>\n    <h1>Internal Server Error</h1>\n    \n  </body>\n</html>\n"
+    http_version: 
+  recorded_at: Sun, 22 Feb 2015 11:58:32 GMT
+- request:
+    method: get
+    uri: https://onename.com/pmarca.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sun, 22 Feb 2015 11:58:33 GMT
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '134'
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: "<html>\n  <head>\n    <title>Internal Server Error</title>\n  </head>\n
+        \ <body>\n    <h1>Internal Server Error</h1>\n    \n  </body>\n</html>\n"
+    http_version: 
+  recorded_at: Sun, 22 Feb 2015 11:58:33 GMT
+- request:
+    method: get
+    uri: http://openname.nametiles.dev/v2//larry.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '972'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '180'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Cache-Control:
+      - public,max-age=300
+      Etag:
+      - W/"2bb9b1b06d25c6bd7f77588c62af6882"
+      X-Request-Id:
+      - cdf2578f-89b5-4fa4-a0a5-15b8c37b81e1
+      X-Runtime:
+      - '0.603472'
+      Date:
+      - Mon, 23 Feb 2015 06:32:35 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"angellist":{"username":"larry-salibra"},"avatar":{"url":"https://s3.amazonaws.com/kd4/larry"},"bio":"Founder
+        \u0026 CEO Pay4Bugs","bitcoin":{"address":"1Q7zdhtkSMQp6Mp5ooyWyJgoXSLiApnmVT"},"cover":{"url":"https://s3.amazonaws.com/dx3/larry"},"facebook":{"proof":{"url":"https://facebook.com/larry.salibra/posts/947870672453"},"username":"larry.salibra"},"github":{"proof":{"url":"https://gist.github.com/larrysalibra/510cc3fe4386f811b5bf"},"username":"larrysalibra"},"graph":{"url":"https://s3.amazonaws.com/grph/larry"},"instagram":{"username":"larrysalibra"},"linkedin":{"url":"http://www.linkedin.com/in/larrysalibra"},"location":{"formatted":"Hong
+        Kong"},"name":{"formatted":"Larry Salibra"},"pgp":{"fingerprint":"B516CB7A08819697B25E4694DE3B5425164C4849","url":"https://s3.amazonaws.com/pk9/larry"},"twitter":{"proof":{"url":"https://twitter.com/larrysalibra/status/492049735935459328"},"username":"larrysalibra"},"v":"0.2","website":"https://www.larrysalibra.com"}'
+    http_version: 
+  recorded_at: Mon, 23 Feb 2015 06:32:35 GMT
+- request:
+    method: get
+    uri: http://openname.nametiles.dev/v2//nothere.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '180'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Cache-Control:
+      - public,max-age=300
+      Content-Length:
+      - '42'
+      X-Request-Id:
+      - 6c34dd23-1679-4053-ad1f-a2c714c0a7c5
+      X-Runtime:
+      - '0.557525'
+      Date:
+      - Mon, 23 Feb 2015 06:32:35 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"Openname nothere doesn''t exist"}'
+    http_version: 
+  recorded_at: Mon, 23 Feb 2015 06:32:35 GMT
+- request:
+    method: get
+    uri: http://openname.nametiles.dev/v2//bitcoinhater.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '180'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Cache-Control:
+      - public,max-age=300
+      Content-Length:
+      - '47'
+      X-Request-Id:
+      - 17a8bddc-c806-4bab-a501-d2eaa853da79
+      X-Runtime:
+      - '0.488571'
+      Date:
+      - Mon, 23 Feb 2015 06:32:36 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"Openname bitcoinhater doesn''t exist"}'
+    http_version: 
+  recorded_at: Mon, 23 Feb 2015 06:32:36 GMT
+- request:
+    method: get
+    uri: http://openname.nametiles.dev/v2//pmarca.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - openname-ruby 0.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '155'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '180'
+      Access-Control-Allow-Methods:
+      - GET, POST, PUT, DELETE, OPTIONS
+      Cache-Control:
+      - public,max-age=300
+      Etag:
+      - W/"347382fb1b572025a03e43d948c1155b"
+      X-Request-Id:
+      - 944b94fb-7edf-4822-9851-538abb5f74b4
+      X-Runtime:
+      - '0.547531'
+      Date:
+      - Mon, 23 Feb 2015 06:32:37 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"message":"This username is reserved for Marc Andreessen. If this
+        is you, please email reservations@onename.io to claim it for free.","status":"reserved"}'
+    http_version: 
+  recorded_at: Mon, 23 Feb 2015 06:32:37 GMT
 recorded_with: VCR 2.9.0

@@ -8,5 +8,5 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |config|
- 
+
 end
