@@ -120,6 +120,7 @@ module Openname
       @github_username = json["github"]["username"] if json["github"]
       @facebook_username = json["facebook"]["username"] if json["facebook"]
       @twitter_username = json["twitter"]["username"] if json["twitter"]
+      @instagram_username = json["instagram"]["username"] if json["instagram"]
       @linkedin_url = json["linkedin"]["url"] if json["linkedin"]
       @bitcoin_address = json["bitcoin"]["address"] if json["bitcoin"]
       @bitmessage_address = json["bitmessage"]["username"] if json["bitmessage"]
