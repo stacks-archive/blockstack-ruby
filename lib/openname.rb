@@ -98,6 +98,7 @@ module Openname
     attr_reader :github_username
     attr_reader :facebook_username
     attr_reader :twitter_username
+    attr_reader :instagram_username
     attr_reader :linkedin_url
     attr_reader :bitcoin_address
     attr_reader :bitmessage_address
