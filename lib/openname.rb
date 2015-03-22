@@ -16,6 +16,8 @@ module Openname
 
   @@endpoint = nil
 
+  @@suffix = ".json"
+
   ##
   # Current endpoint used by the library
   def self.endpoint
@@ -27,11 +29,30 @@ module Openname
   end
 
   ##
+  # Set suffix appended to openname to +suffix+
+  # if +suffix+ is +nil+, no suffix will be appended
+  def self.suffix=(suffix)
+    @@suffix = suffix
+  end
+
+  ##
+  # Suffix appended to openname on each endpoint request
+  def self.suffix
+    if @@suffix.nil?
+      return ""
+    else
+      return @@suffix
+    end
+  end
+
+  ##
   # Set endpoint to +url+
   # if +url+ is +nil+, +DEFAULT_ENDPOINT+ is used as the endpoint
   def self.endpoint=(url)
     @@endpoint = url
   end
+
+
 
   ##
   # Check if the given +openname+ is in proper format
@@ -44,7 +65,7 @@ module Openname
   # Retrieve JSON data stored in Openname record
   def self.get_json(openname)
     raise ArgumentError.new("#{openname} is not a valid Openname") if !self.valid?(openname)
-    uri = URI(self.endpoint + "/#{openname.downcase}.json")
+    uri = URI(self.endpoint + "/#{openname.downcase}#{self.suffix}")
     http = Net::HTTP.new(uri.host,uri.port)
     http.use_ssl = uri.scheme == "https" ? true : false
     req = Net::HTTP::Get.new(uri.path, {'User-Agent' => USERAGENT})
@@ -124,7 +145,7 @@ module Openname
       @instagram_username = json["instagram"]["username"] if json["instagram"]
       @linkedin_url = json["linkedin"]["url"] if json["linkedin"]
       @bitcoin_address = json["bitcoin"]["address"] if json["bitcoin"]
-      @bitmessage_address = json["bitmessage"]["username"] if json["bitmessage"]
+      @bitmessage_address = json["bitmessage"]["address"] if json["bitmessage"]
       @bitcoinotc_username = json["bitcoinotc"]["username"] if json["bitcoinotc"]
       @pgp_fingerprint = json["pgp"]["fingerprint"] if json["pgp"]
       @pgp_url = json["pgp"]["url"] if json["pgp"]
