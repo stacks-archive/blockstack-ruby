@@ -77,7 +77,14 @@ module Openname
          if(json_body["status"] && json_body["status"] == "reserved")
            NameError.new("Openname \"#{openname}\" does not exist. It is reserved.")
          else
-            # Current ONS resolver wraps profile 
+
+            # Current ONS resolver always returns 200
+            # so we need to manually detect names that don't exist
+            if (json_body["error"])
+                raise NameError.new("Openname \"#{openname}\" does not exist")
+            end
+
+            # Current ONS resolver wraps profile
             # so as to also return proof verification
             # results. openname-ruby ignores verifications
             if (json_body["profile"])
