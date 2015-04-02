@@ -18,6 +18,9 @@ module Openname
 
   @@suffix = ".json"
 
+  @@username = nil
+  @@password = nil
+
   ##
   # Current endpoint used by the library
   def self.endpoint
@@ -26,6 +29,14 @@ module Openname
     else
       return @@endpoint
     end
+  end
+
+  ##
+  # Send basic authentication
+  #
+  def self.auth(username, password)
+    @@username = username
+    @@password = password
   end
 
   ##
@@ -69,6 +80,7 @@ module Openname
     http = Net::HTTP.new(uri.host,uri.port)
     http.use_ssl = uri.scheme == "https" ? true : false
     req = Net::HTTP::Get.new(uri.path, {'User-Agent' => USERAGENT})
+    req.basic_auth(@@username, @@password) if @@username && @@password
     res = http.request(req)
     case res.code.to_s
       when "404" then raise NameError.new("Openname \"#{openname}\" does not exist")
