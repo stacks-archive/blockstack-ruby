@@ -12,7 +12,7 @@ describe Openname, :vcr => { :cassette_name => "openname", :record => :new_episo
 		Openname.endpoint = "https://www.example.com"
 		Openname.endpoint.should == "https://www.example.com"
 	    Openname.endpoint = nil
-	    Openname.endpoint.should == "https://openname.nametiles.co/v2/"
+	    Openname.endpoint.should == "https://api.nametiles.co/v1/users"
 	  end
 
 	it "should retrieve openname user" do
