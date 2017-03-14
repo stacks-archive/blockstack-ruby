@@ -94,6 +94,8 @@ module Blockstack
       decentralized_id.split(':')[2]
     end
 
+    protected
+
     def self.public_keys_match_issuer?(decoded_token)
       public_keys = decoded_token['publicKeys']
       address_from_issuer = get_address_from_did(decoded_token['iss'])
@@ -119,8 +121,6 @@ module Blockstack
       address_from_issuer = get_address_from_did decoded_token['iss']
       name_owning_address == address_from_issuer
     end
-
-    protected
 
     def self.faraday
       connection = Faraday.new
