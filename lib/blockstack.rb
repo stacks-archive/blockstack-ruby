@@ -46,6 +46,8 @@ module Blockstack
       raise InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
 
       raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(BLOCKSTACK_API, decoded_token)
+
+      return decoded_token
     rescue JWT::VerificationError => error
       raise InvalidAuthResponse.new("Signature on JWT is invalid")
     rescue JWT::DecodeError => error
