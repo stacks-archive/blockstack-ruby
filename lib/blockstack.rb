@@ -20,7 +20,7 @@ module Blockstack
       verify = false
       decoded_tokens = JWT.decode auth_token, public_key, verify, algorithm: ALGORITHM
       decoded_token = decoded_tokens[0]
-      puts decoded_token
+
       REQUIRED_CLAIMS.each do |field|
         raise InvalidAuthResponse.new("Missing required '#{field}' claim.") if !decoded_token.key?(field.to_s)
       end
