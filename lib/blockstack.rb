@@ -4,14 +4,39 @@ require "faraday"
 require "jwt"
 
 module Blockstack
+    class InvalidAuthResponse < StandardError; end
+
     USER_AGENT = "blockstack-ruby #{VERSION}"
     ALGORITHM = "ES256K"
     REQUIRED_CLAIMS = %w(iss iat jti exp username profile publicKeys)
-    LEEWAY = 300 # seconds
-    VALID_WITHIN = 300 # seconds
-    BLOCKSTACK_API = "http://localhost:6270"
 
-    class InvalidAuthResponse < StandardError; end
+    DEFAULT_LEEWAY = 30 # seconds
+    DEFAULT_VALID_WITHIN = 30 # seconds
+    DEFAULT_API = "http://localhost:6270"
+
+    def self.api=(api)
+      @@api = api.nil? ? DEFAULT_API : api
+    end
+
+    def self.api
+      @@api
+    end
+
+    def self.leeway=(leeway)
+      @@leeway = leeway.nil? ? DEFAULT_LEEWAY : leeway
+    end
+
+    def self.leeway
+      @@leeway
+    end
+
+    def self.valid_within=(valid_within)
+      @@valid_within = valid_within.nil? ? DEFAULT_VALID_WITHIN : valid_within
+    end
+
+    def self.valid_within
+      @@valid_within
+    end
 
     def self.verify_auth_response(auth_token)
       # decode & verify token without checking signature so we can extract
@@ -102,4 +127,10 @@ module Blockstack
       connection.headers[:user_agent] = USER_AGENT
       connection
     end
+
+    private
+
+    @@leeway = DEFAULT_LEEWAY
+    @@valid_within = DEFAULT_VALID_WITHIN
+    @@api = DEFAULT_API
 end
