@@ -39,13 +39,13 @@ require "blockstack"
 begin
   auth_response = request.params['authResponse']
 
-  decoded_auth_response = ::Blockstack.verify_auth_response auth_response
+  decoded_auth_response = Blockstack.verify_auth_response auth_response
 
   # login succeeded
   users_unique_id = decoded_auth_response['iss']
   verified_username = decoded_auth_response['username'] # nil if not provided
   profile = decoded_auth_response['profile']
-rescue ::Blockstack::InvalidAuthResponse => error
+rescue Blockstack::InvalidAuthResponse => error
   # login failed
 end
 ```
