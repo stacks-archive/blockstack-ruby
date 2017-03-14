@@ -50,7 +50,7 @@ module Blockstack
         raise InvalidAuthResponse.new("Missing required '#{field}' claim.") if !decoded_token.key?(field.to_s)
       end
       raise InvalidAuthResponse.new("Missing required 'iat' claim.") if !decoded_token["iat"]
-      raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token["iat"]).abs > VALID_WITHIN
+      raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token["iat"]).abs > self.valid_within
 
       public_keys = decoded_token['publicKeys']
 
@@ -65,12 +65,12 @@ module Blockstack
       verify = true
 
       # decode & verify signature
-      decoded_tokens = JWT.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: LEEWAY
+      decoded_tokens = JWT.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: self.leeway
       decoded_token = decoded_tokens[0]
 
       raise InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
 
-      raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(BLOCKSTACK_API, decoded_token)
+      raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
       return decoded_token
     rescue JWT::VerificationError => error
@@ -105,11 +105,11 @@ module Blockstack
       address_from_issuer == address_from_public_keys
     end
 
-    def self.public_keys_match_username?(blockstack_api, decoded_token)
+    def self.public_keys_match_username?(decoded_token)
       username = decoded_token["username"]
       return true if username.nil?
 
-      response = Faraday.get "#{blockstack_api}/v1/names/#{username}"
+      response = Faraday.get "#{self.api}/v1/names/#{username}"
       json = JSON.parse response.body
 
       raise "Issuer claimed username that doesn't exist" if response.status == 404
