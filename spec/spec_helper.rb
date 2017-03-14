@@ -1,4 +1,4 @@
-require 'openname'
+require 'blockstack'
 require 'vcr'
 
 VCR.configure do |c|

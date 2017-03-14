@@ -1,12 +1,14 @@
-# Openname
+# Blockstack
 
-A ruby library for the Openname distributed identity & naming system
+The Blockstack ruby library for identity and authentication
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'openname'
+```ruby
+gem 'blockstack'
+```
 
 And then execute:
 
@@ -14,34 +16,23 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openname
+    $ gem install blockstack
 
 ## Usage
 
- ```
- require "openname"
- user = Openname.get("larry")
- 
- larrys_bitcoin_address = user.bitcoin_address
- larrys_website = user.website
- ```
- 
-Convenience method `git_bitcoin_address` can be used for retrieving Bitcoin addresses.  If you give it a Bitcoin address it will return the same Bitcoin address; if you give it an Openname it will return the Openname user's Bitcoin address. Useful for allowing end users to either directly specify a Bitcoin address or provide a Openname in the same input field. 
+TODO: Write usage instructions here
 
-```
- require "openname"
- 
- larrys_bitcoin_address = Openname.get_bitcoin_address("larry")
- 
- an_address = "143xFrxppUD9oQE7mGvQFe23h814YorMBs
- an_address == Openname.get_bitcoin_address("143xFrxppUD9oQE7mGvQFe23h814YorMBs") # evaluates to true
+## Development
 
- ```
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/blockstack. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

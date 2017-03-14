@@ -1,4 +1,5 @@
 Copyright (c) 2014 Appartisan Limited
+Copyright (c) 2017 Blockstack Inc
 
 MIT License
 
