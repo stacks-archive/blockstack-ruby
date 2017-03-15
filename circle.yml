@@ -5,6 +5,7 @@ machine:
 dependencies:
   pre:
     - gem install bundler -v 1.13.6
+    - bundle install
 
 test:
   override:
