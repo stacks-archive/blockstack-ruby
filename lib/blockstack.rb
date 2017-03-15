@@ -1,7 +1,7 @@
 require "blockstack/version"
 require "bitcoin"
 require "faraday"
-require "jwt"
+require "jwt-blockstack"
 
 module Blockstack
     class InvalidAuthResponse < StandardError; end
