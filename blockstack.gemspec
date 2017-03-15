@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "vcr"
 
-  spec.add_dependency "jwt"
+  spec.add_dependency "jwt-blockstack"
   spec.add_dependency "bitcoin"
   spec.add_dependency "faraday"
 
