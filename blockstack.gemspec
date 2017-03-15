@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr"
 
   spec.add_dependency "jwt-blockstack"
-  spec.add_dependency "bitcoin"
+  spec.add_dependency "bitcoin-ruby"
   spec.add_dependency "faraday"
 
 end
