@@ -8,7 +8,7 @@ module Blockstack
 
     USER_AGENT = "blockstack-ruby #{VERSION}"
     ALGORITHM = "ES256K"
-    REQUIRED_CLAIMS = %w(iss iat jti exp username profile publicKeys)
+    REQUIRED_CLAIMS = %w(iss iat jti exp username profile public_keys)
 
     DEFAULT_LEEWAY = 30 # seconds
     DEFAULT_VALID_WITHIN = 30 # seconds
@@ -52,9 +52,9 @@ module Blockstack
       raise InvalidAuthResponse.new("Missing required 'iat' claim.") if !decoded_token["iat"]
       raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token["iat"]).abs > self.valid_within
 
-      public_keys = decoded_token['publicKeys']
+      public_keys = decoded_token['public_keys']
 
-      raise InvalidAuthResponse.new("Invalid publicKeys array: only 1 key is supported") unless public_keys.length == 1
+      raise InvalidAuthResponse.new("Invalid public_keys array: only 1 key is supported") unless public_keys.length == 1
 
       compressed_hex_public_key = public_keys[0]
       bignum = OpenSSL::BN.new(compressed_hex_public_key, 16)
@@ -97,7 +97,7 @@ module Blockstack
     protected
 
     def self.public_keys_match_issuer?(decoded_token)
-      public_keys = decoded_token['publicKeys']
+      public_keys = decoded_token['public_keys']
       address_from_issuer = get_address_from_did(decoded_token['iss'])
 
       raise 'Multiple public keys are not supported' unless public_keys.count == 1
