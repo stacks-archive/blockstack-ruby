@@ -1,7 +1,7 @@
 require "blockstack/version"
 require "bitcoin"
 require "faraday"
-require "jwt-blockstack"
+require "jwtb"
 
 module Blockstack
     class InvalidAuthResponse < StandardError; end
@@ -43,7 +43,7 @@ module Blockstack
       # public keys
       public_key = nil
       verify = false
-      decoded_tokens = JWT.decode auth_token, public_key, verify, algorithm: ALGORITHM
+      decoded_tokens = JWTB.decode auth_token, public_key, verify, algorithm: ALGORITHM
       decoded_token = decoded_tokens[0]
 
       REQUIRED_CLAIMS.each do |field|
@@ -65,7 +65,7 @@ module Blockstack
       verify = true
 
       # decode & verify signature
-      decoded_tokens = JWT.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: self.leeway
+      decoded_tokens = JWTB.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: self.leeway
       decoded_token = decoded_tokens[0]
 
       raise InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
@@ -73,9 +73,9 @@ module Blockstack
       raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
       return decoded_token
-    rescue JWT::VerificationError => error
+    rescue JWTB::VerificationError => error
       raise InvalidAuthResponse.new("Signature on JWT is invalid")
-    rescue JWT::DecodeError => error
+    rescue JWTB::DecodeError => error
       raise InvalidAuthResponse.new("Unable to decode JWT")
     rescue RuntimeError => error
       raise InvalidAuthResponse.new(error.message)
