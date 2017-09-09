@@ -1,4 +1,5 @@
 require "blockstack/version"
+require "blockstack/user"
 require "bitcoin"
 require "faraday"
 require "jwtb"
