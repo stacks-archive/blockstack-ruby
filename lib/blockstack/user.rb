@@ -26,57 +26,57 @@ module Blockstack
       attr_reader :schema_version
 
       def initialize(json, username)
-          if(json["profile"])
-              json = json["profile"]
+          if(json['profile'])
+              json = json['profile']
           end
-          if(json['v'] == "0.2")
+          if(json['v'] == '0.2')
             @username = username
-            @name_formatted = json["name"]["formatted"] if json["name"]
-            @avatar_url = json["avatar"]["url"] if json["avatar"]
-            @cover_url = json["cover"]["url"] if json["cover"]
-            @location_formatted = json["location"]["formatted"] if json["location"]
-            @website = json["website"]
-            @bio = json["bio"]
-            @angellist_username = json["angellist"]["username"] if json["angellist"]
-            @github_username = json["github"]["username"] if json["github"]
-            @facebook_username = json["facebook"]["username"] if json["facebook"]
-            @twitter_username = json["twitter"]["username"] if json["twitter"]
-            @instagram_username = json["instagram"]["username"] if json["instagram"]
-            @linkedin_url = json["linkedin"]["url"] if json["linkedin"]
-            @bitcoin_address = json["bitcoin"]["address"] if json["bitcoin"]
-            @bitmessage_address = json["bitmessage"]["address"] if json["bitmessage"]
-            @bitcoinotc_username = json["bitcoinotc"]["username"] if json["bitcoinotc"]
-            @pgp_fingerprint = json["pgp"]["fingerprint"] if json["pgp"]
-            @pgp_url = json["pgp"]["url"] if json["pgp"]
-            @schema_version = json["v"]
-            @orgs = parse_orgs(json["orgs"])
+            @name_formatted = json['name']['formatted'] if json['name']
+            @avatar_url = json['avatar']['url'] if json['avatar']
+            @cover_url = json['cover']['url'] if json['cover']
+            @location_formatted = json['location']['formatted'] if json['location']
+            @website = json['website']
+            @bio = json['bio']
+            @angellist_username = json['angellist']['username'] if json['angellist']
+            @github_username = json['github']['username'] if json['github']
+            @facebook_username = json['facebook']['username'] if json['facebook']
+            @twitter_username = json['twitter']['username'] if json['twitter']
+            @instagram_username = json['instagram']['username'] if json['instagram']
+            @linkedin_url = json['linkedin']['url'] if json['linkedin']
+            @bitcoin_address = json['bitcoin']['address'] if json['bitcoin']
+            @bitmessage_address = json['bitmessage']['address'] if json['bitmessage']
+            @bitcoinotc_username = json['bitcoinotc']['username'] if json['bitcoinotc']
+            @pgp_fingerprint = json['pgp']['fingerprint'] if json['pgp']
+            @pgp_url = json['pgp']['url'] if json['pgp']
+            @schema_version = json['v']
+            @orgs = parse_orgs(json['orgs'])
           else
             @username = username
-            @name_formatted = json["name"] if json["name"]
+            @name_formatted = json['name'] if json['name']
             @avatar_url = find_image_url(json, 'avatar')
             @cover_url = find_image_url(json, 'cover')
-            @location_formatted = json["address"]["addressLocality"] if json["address"]
-            @website = json["website"][0]["url"] if json["website"] && json["website"][0]
-            @bio = json["description"]
-            @angellist_username = find_account_username(json, "angellist")
-            @github_username = find_account_username(json, "github")
-            @facebook_username = find_account_username(json, "facebook")
-            @twitter_username = find_account_username(json, "twitter")
-            @instagram_username = find_account_username(json, "instagram")
-            @linkedin_url = find_account_username(json, "linkedin")
-            @bitcoin_address = find_account_username(json, "bitcoin")
-            @bitmessage_address = find_account_username(json, "bitmessage")
-            @bitcoinotc_username = find_account_username(json, "bitcoinotc")
-            @pgp_fingerprint = find_account_username(json, "pgp")
-            @pgp_url = find_account(json, "pgp")['contentUrl'] if @pgp_fingerprint
-            @schema_version = "0.3"
-            @orgs = parse_orgs(json["orgs"])
+            @location_formatted = json['address']['addressLocality'] if json['address']
+            @website = json['website'][0]['url'] if json['website'] && json['website'][0]
+            @bio = json['description']
+            @angellist_username = find_account_username(json, 'angellist')
+            @github_username = find_account_username(json, 'github')
+            @facebook_username = find_account_username(json, 'facebook')
+            @twitter_username = find_account_username(json, 'twitter')
+            @instagram_username = find_account_username(json, 'instagram')
+            @linkedin_url = find_account_username(json, 'linkedin')
+            @bitcoin_address = find_account_username(json, 'bitcoin')
+            @bitmessage_address = find_account_username(json, 'bitmessage')
+            @bitcoinotc_username = find_account_username(json, 'bitcoinotc')
+            @pgp_fingerprint = find_account_username(json, 'pgp')
+            @pgp_url = find_account(json, 'pgp')['contentUrl'] if @pgp_fingerprint
+            @schema_version = '0.3'
+            @orgs = parse_orgs(json['orgs'])
           end
 
       end
 
       def openname
-          warn "[DEPRECATION] `openname` is deprecated.  Please use `username` instead."
+          warn '[DEPRECATION] `openname` is deprecated.  Please use `username` instead.'
           username
       end
 

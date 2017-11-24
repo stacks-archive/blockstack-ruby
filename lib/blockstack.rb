@@ -1,19 +1,19 @@
-require "blockstack/version"
-require "blockstack/user"
-require "bitcoin"
-require "faraday"
-require "jwtb"
+require 'blockstack/version'
+require 'blockstack/user'
+require 'bitcoin'
+require 'faraday'
+require 'jwtb'
 
 module Blockstack
     class InvalidAuthResponse < StandardError; end
 
     USER_AGENT = "blockstack-ruby #{VERSION}"
-    ALGORITHM = "ES256K"
+    ALGORITHM = 'ES256K'
     REQUIRED_CLAIMS = %w(iss iat jti exp username profile public_keys)
 
     DEFAULT_LEEWAY = 30 # seconds
     DEFAULT_VALID_WITHIN = 30 # seconds
-    DEFAULT_API = "http://localhost:6270"
+    DEFAULT_API = 'http://localhost:6270'
 
     def self.api=(api)
       @@api = api.nil? ? DEFAULT_API : api
@@ -50,12 +50,12 @@ module Blockstack
       REQUIRED_CLAIMS.each do |field|
         raise InvalidAuthResponse.new("Missing required '#{field}' claim.") if !decoded_token.key?(field.to_s)
       end
-      raise InvalidAuthResponse.new("Missing required 'iat' claim.") if !decoded_token["iat"]
-      raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token["iat"]).abs > self.valid_within
+      raise InvalidAuthResponse.new("Missing required 'iat' claim.") if !decoded_token['iat']
+      raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > self.valid_within
 
       public_keys = decoded_token['public_keys']
 
-      raise InvalidAuthResponse.new("Invalid public_keys array: only 1 key is supported") unless public_keys.length == 1
+      raise InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
 
       compressed_hex_public_key = public_keys[0]
       bignum = OpenSSL::BN.new(compressed_hex_public_key, 16)
@@ -75,9 +75,9 @@ module Blockstack
 
       return decoded_token
     rescue JWTB::VerificationError => error
-      raise InvalidAuthResponse.new("Signature on JWT is invalid")
+      raise InvalidAuthResponse.new('Signature on JWT is invalid')
     rescue JWTB::DecodeError => error
-      raise InvalidAuthResponse.new("Unable to decode JWT")
+      raise InvalidAuthResponse.new('Unable to decode JWT')
     rescue RuntimeError => error
       raise InvalidAuthResponse.new(error.message)
     end
@@ -109,7 +109,7 @@ module Blockstack
     end
 
     def self.public_keys_match_username?(decoded_token)
-      username = decoded_token["username"]
+      username = decoded_token['username']
       return true if username.nil?
 
       response = Faraday.get "#{self.api}/v1/names/#{username}"
