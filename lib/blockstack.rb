@@ -16,27 +16,27 @@ module Blockstack
   DEFAULT_API = 'http://localhost:6270'
 
   def self.api=(api)
-    @@api = api.nil? ? DEFAULT_API : api
+    @api = api.nil? ? DEFAULT_API : api
   end
 
   def self.api
-    @@api
+    @api
   end
 
   def self.leeway=(leeway)
-    @@leeway = leeway.nil? ? DEFAULT_LEEWAY : leeway
+    @leeway = leeway.nil? ? DEFAULT_LEEWAY : leeway
   end
 
   def self.leeway
-    @@leeway
+    @leeway
   end
 
   def self.valid_within=(valid_within)
-    @@valid_within = valid_within.nil? ? DEFAULT_VALID_WITHIN : valid_within
+    @valid_within = valid_within.nil? ? DEFAULT_VALID_WITHIN : valid_within
   end
 
   def self.valid_within
-    @@valid_within
+    @valid_within
   end
 
   def self.verify_auth_response(auth_token)
@@ -131,7 +131,7 @@ module Blockstack
 
   private
 
-  @@leeway = DEFAULT_LEEWAY
-  @@valid_within = DEFAULT_VALID_WITHIN
-  @@api = DEFAULT_API
+  @leeway = DEFAULT_LEEWAY
+  @valid_within = DEFAULT_VALID_WITHIN
+  @api = DEFAULT_API
 end
