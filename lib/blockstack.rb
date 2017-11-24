@@ -48,14 +48,14 @@ module Blockstack
     decoded_token = decoded_tokens[0]
 
     REQUIRED_CLAIMS.each do |field|
-      raise InvalidAuthResponse.new("Missing required '#{field}' claim.") unless decoded_token.key?(field.to_s)
+      fail InvalidAuthResponse.new("Missing required '#{field}' claim.") unless decoded_token.key?(field.to_s)
     end
-    raise InvalidAuthResponse.new("Missing required 'iat' claim.") unless decoded_token['iat']
-    raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > self.valid_within
+    fail InvalidAuthResponse.new("Missing required 'iat' claim.") unless decoded_token['iat']
+    fail InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > self.valid_within
 
     public_keys = decoded_token['public_keys']
 
-    raise InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
+    fail InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
 
     compressed_hex_public_key = public_keys[0]
     bignum = OpenSSL::BN.new(compressed_hex_public_key, 16)
@@ -69,9 +69,9 @@ module Blockstack
     decoded_tokens = JWTB.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: self.leeway
     decoded_token = decoded_tokens[0]
 
-    raise InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
+    fail InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
 
-    raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
+    fail InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
     return decoded_token
   rescue JWTB::VerificationError
@@ -84,8 +84,8 @@ module Blockstack
 
   def self.get_did_type(decentralized_id)
     did_parts = decentralized_id.split(':')
-    raise 'Decentralized IDs must have 3 parts' if did_parts.length != 3
-    raise 'Decentralized IDs must start with "did"' if did_parts[0].downcase != 'did'
+    fail 'Decentralized IDs must have 3 parts' if did_parts.length != 3
+    fail 'Decentralized IDs must start with "did"' if did_parts[0].downcase != 'did'
     did_parts[1].downcase
   end
 
@@ -101,10 +101,9 @@ module Blockstack
     public_keys = decoded_token['public_keys']
     address_from_issuer = get_address_from_did(decoded_token['iss'])
 
-    raise 'Multiple public keys are not supported' unless public_keys.count == 1
+    fail 'Multiple public keys are not supported' unless public_keys.count == 1
 
     address_from_public_keys = Bitcoin::pubkey_to_address public_keys.first
-
     address_from_issuer == address_from_public_keys
   end
 
@@ -115,8 +114,8 @@ module Blockstack
     response = Faraday.get "#{self.api}/v1/names/#{username}"
     json = JSON.parse response.body
 
-    raise "Issuer claimed username that doesn't exist" if response.status == 404
-    raise "Unable to verify issuer's claimed username" if response.status != 200
+    fail "Issuer claimed username that doesn't exist" if response.status == 404
+    fail "Unable to verify issuer's claimed username" if response.status != 200
 
     name_owning_address = json['address']
     address_from_issuer = get_address_from_did decoded_token['iss']
