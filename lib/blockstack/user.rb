@@ -26,9 +26,8 @@ module Blockstack
     attr_reader :schema_version
 
     def initialize(json, username)
-      if json['profile']
-        json = json['profile']
-      end
+      json = json['profile'] if json['profile']
+
       if json['v'] == '0.2'
         @username = username
         @name_formatted = json['name']['formatted'] if json['name']
@@ -103,9 +102,7 @@ module Blockstack
 
     def find_account_username(json, service)
       account = find_account(json, service)
-      if account
-        return account['identifier']
-      end
+      return account['identifier'] if account
       nil
     end
 
