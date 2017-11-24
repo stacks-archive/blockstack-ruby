@@ -26,10 +26,10 @@ module Blockstack
     attr_reader :schema_version
 
     def initialize(json, username)
-      if(json['profile'])
+      if json['profile']
         json = json['profile']
       end
-      if(json['v'] == '0.2')
+      if json['v'] == '0.2'
         @username = username
         @name_formatted = json['name']['formatted'] if json['name']
         @avatar_url = json['avatar']['url'] if json['avatar']
@@ -83,7 +83,7 @@ module Blockstack
 
     def find_image_url(json, type)
       images = json['image']
-      if(images && images.kind_of?(Array))
+      if images && images.kind_of?(Array)
         for image in images
           return image['contentUrl'] if image['name'] == type
         end
@@ -93,7 +93,7 @@ module Blockstack
 
     def find_account(json, service)
       accounts = json['account']
-      if(accounts && accounts.kind_of?(Array))
+      if accounts && accounts.kind_of?(Array)
         for account in accounts
           return account if account['service'] == service
         end
@@ -103,7 +103,7 @@ module Blockstack
 
     def find_account_username(json, service)
       account = find_account(json, service)
-      if(account)
+      if account
         return account['identifier']
       end
       nil
