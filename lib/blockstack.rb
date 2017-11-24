@@ -48,9 +48,9 @@ module Blockstack
     decoded_token = decoded_tokens[0]
 
     REQUIRED_CLAIMS.each do |field|
-      raise InvalidAuthResponse.new("Missing required '#{field}' claim.") if !decoded_token.key?(field.to_s)
+      raise InvalidAuthResponse.new("Missing required '#{field}' claim.") unless decoded_token.key?(field.to_s)
     end
-    raise InvalidAuthResponse.new("Missing required 'iat' claim.") if !decoded_token['iat']
+    raise InvalidAuthResponse.new("Missing required 'iat' claim.") unless decoded_token['iat']
     raise InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > self.valid_within
 
     public_keys = decoded_token['public_keys']
