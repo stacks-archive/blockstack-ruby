@@ -118,6 +118,5 @@ module Blockstack
       end
       orgs
     end
-
   end
 end

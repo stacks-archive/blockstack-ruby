@@ -41,8 +41,8 @@ describe Blockstack::User do
     }
   }
 	eos
-	context 'Creating user from profile json' do
 
+	context 'Creating user from profile json' do
 		it 'should load a current user profile' do
 			user = Blockstack::User.from_json(larry_json_profile, 'larry')
 			expect(user.username).to eq('larry')
@@ -83,7 +83,5 @@ describe Blockstack::User do
 			expect(user.pgp_fingerprint).to eq(nil)
 			expect(user.pgp_url).to eq(nil)
 		end
-
 	end
-
 end

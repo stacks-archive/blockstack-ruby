@@ -40,7 +40,6 @@ describe Blockstack, :vcr => { :cassette_name => 'blockstack', :record => :new_e
 	end
 
 	context 'getting did types' do
-
 		it 'should get did type from did' do
 			decentralized_id = 'did:btc-addr:1EXwrz2E3WvxhdeRB1ArKtdE5NKtKC7Edx'
 			expect(Blockstack.get_did_type(decentralized_id)).to eq('btc-addr')
@@ -59,16 +58,12 @@ describe Blockstack, :vcr => { :cassette_name => 'blockstack', :record => :new_e
 				Blockstack.get_did_type(decentralized_id)
 			}.to raise_error(RuntimeError)
 		end
-
 	end
 
 	context 'extracting bitcoin address from did' do
-
 		it 'should return bitcoin address given valid did' do
 			decentralized_id = 'did:btc-addr:1EXwrz2E3WvxhdeRB1ArKtdE5NKtKC7Edx'
 			expect(Blockstack.get_address_from_did(decentralized_id)).to eq('1EXwrz2E3WvxhdeRB1ArKtdE5NKtKC7Edx')
 		end
-
 	end
-
 end

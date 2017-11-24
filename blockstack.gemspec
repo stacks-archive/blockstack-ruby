@@ -28,5 +28,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jwtb', '2.0.0.beta2.bsk1'
   spec.add_dependency 'bitcoin-ruby'
   spec.add_dependency 'faraday'
-
 end
