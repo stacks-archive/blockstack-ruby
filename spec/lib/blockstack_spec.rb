@@ -49,15 +49,15 @@ describe Blockstack, :vcr => { :cassette_name => 'blockstack', :record => :new_e
 		it "should raise RuntimeError if there aren't 3 parts" do
 			decentralized_id = 'did:1EXwrz2E3WvxhdeRB1ArKtdE5NKtKC7Edx'
 			expect {
-		       Blockstack.get_did_type(decentralized_id)
-				}.to raise_error(RuntimeError)
+	  		Blockstack.get_did_type(decentralized_id)
+			}.to raise_error(RuntimeError)
 		end
 
 		it "should raise RuntimeError if it doesn't start with did" do
 			decentralized_id = 'btc-addr:1EXwrz2E3WvxhdeRB1ArKtdE5NKtKC7Edx'
 			expect {
-					 Blockstack.get_did_type(decentralized_id)
-				}.to raise_error(RuntimeError)
+				Blockstack.get_did_type(decentralized_id)
+			}.to raise_error(RuntimeError)
 		end
 
 	end
