@@ -74,9 +74,9 @@ module Blockstack
     raise InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
     return decoded_token
-  rescue JWTB::VerificationError => error
+  rescue JWTB::VerificationError
     raise InvalidAuthResponse.new('Signature on JWT is invalid')
-  rescue JWTB::DecodeError => error
+  rescue JWTB::DecodeError
     raise InvalidAuthResponse.new('Unable to decode JWT')
   rescue RuntimeError => error
     raise InvalidAuthResponse.new(error.message)
