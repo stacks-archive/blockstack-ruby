@@ -82,8 +82,8 @@ module Blockstack
 
     def find_image_url(json, type)
       images = json['image']
-      if images && images.kind_of?(Array)
-        for image in images
+      if images && images.is_a?(Array)
+        images.each do |image|
           return image['contentUrl'] if image['name'] == type
         end
       end
@@ -92,8 +92,8 @@ module Blockstack
 
     def find_account(json, service)
       accounts = json['account']
-      if accounts && accounts.kind_of?(Array)
-        for account in accounts
+      if accounts && accounts.is_a?(Array)
+        accounts.each do |account|
           return account if account['service'] == service
         end
       end
@@ -107,9 +107,9 @@ module Blockstack
     end
 
     def parse_orgs(orgs_json)
-      orgs = Array.new
+      orgs = []
       if orgs_json
-        for org_json in orgs_json
+        orgs_json.each do |org_json|
           orgs << Org.new(org_json)
         end
       end
