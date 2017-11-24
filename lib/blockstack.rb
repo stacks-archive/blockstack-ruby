@@ -39,24 +39,17 @@ module Blockstack
     @valid_within
   end
 
-  def self.verify_auth_response(auth_token)
-    # decode & verify token without checking signature so we can extract
-    # public keys
+  # decode & verify token without checking signature so we can extract
+  # public keys
+  def self.verify_without_signature(auth_token)
     public_key = nil
     verify = false
     decoded_tokens = JWTB.decode auth_token, public_key, verify, algorithm: ALGORITHM
-    decoded_token = decoded_tokens[0]
+    decoded_tokens[0]
+  end
 
-    REQUIRED_CLAIMS.each do |field|
-      fail InvalidAuthResponse.new("Missing required '#{field}' claim.") unless decoded_token.key?(field.to_s)
-    end
-    fail InvalidAuthResponse.new("Missing required 'iat' claim.") unless decoded_token['iat']
-    fail InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > self.valid_within
-
-    public_keys = decoded_token['public_keys']
-
-    fail InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
-
+  # decode & verify signature
+  def self.verify_with_signature(auth_token)
     compressed_hex_public_key = public_keys[0]
     bignum = OpenSSL::BN.new(compressed_hex_public_key, 16)
     group = OpenSSL::PKey::EC::Group.new 'secp256k1'
@@ -65,12 +58,24 @@ module Blockstack
     ecdsa_key.public_key = public_key
     verify = true
 
-    # decode & verify signature
-    decoded_tokens = JWTB.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: self.leeway
-    decoded_token = decoded_tokens[0]
+    decoded_tokens = JWTB.decode auth_token, ecdsa_key, verify, algorithm: ALGORITHM, exp_leeway: leeway
+    decoded_tokens[0]
+  end
 
+  def self.verify_auth_response(auth_token)
+    decoded_token = verify_without_signature(auth_token)
+
+    REQUIRED_CLAIMS.each do |field|
+      fail InvalidAuthResponse.new("Missing required '#{field}' claim.") unless decoded_token.key?(field.to_s)
+    end
+    fail InvalidAuthResponse.new("Missing required 'iat' claim.") unless decoded_token['iat']
+    fail InvalidAuthResponse.new("'iat' timestamp claim is skewed too far from present.") if (Time.now.to_i - decoded_token['iat']).abs > valid_within
+
+    public_keys = decoded_token['public_keys']
+    fail InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
+
+    decoded_token = verify_with_signature(auth_token)
     fail InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
-
     fail InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
     return decoded_token
@@ -103,7 +108,7 @@ module Blockstack
 
     fail 'Multiple public keys are not supported' unless public_keys.count == 1
 
-    address_from_public_keys = Bitcoin::pubkey_to_address public_keys.first
+    address_from_public_keys = Bitcoin.pubkey_to_address(public_keys.first)
     address_from_issuer == address_from_public_keys
   end
 
@@ -111,7 +116,7 @@ module Blockstack
     username = decoded_token['username']
     return true if username.nil?
 
-    response = Faraday.get "#{self.api}/v1/names/#{username}"
+    response = Faraday.get "#{api}/v1/names/#{username}"
     json = JSON.parse response.body
 
     fail "Issuer claimed username that doesn't exist" if response.status == 404
