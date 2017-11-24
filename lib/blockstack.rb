@@ -16,7 +16,7 @@ module Blockstack
   DEFAULT_API = 'http://localhost:6270'
 
   def self.api=(api)
-    @api = api.nil? ? DEFAULT_API : api
+    @api = api || DEFAULT_API
   end
 
   def self.api
@@ -24,7 +24,7 @@ module Blockstack
   end
 
   def self.leeway=(leeway)
-    @leeway = leeway.nil? ? DEFAULT_LEEWAY : leeway
+    @leeway = leeway || DEFAULT_LEEWAY
   end
 
   def self.leeway
@@ -32,7 +32,7 @@ module Blockstack
   end
 
   def self.valid_within=(valid_within)
-    @valid_within = valid_within.nil? ? DEFAULT_VALID_WITHIN : valid_within
+    @valid_within = valid_within || DEFAULT_VALID_WITHIN
   end
 
   def self.valid_within
