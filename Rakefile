@@ -1,7 +1,13 @@
-require "bundler/gem_tasks"
-require "rspec/core/rake_task"
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.options = ['--lint']
+end
 
 RSpec::Core::RakeTask.new
 
-task :default => :spec
-task :test => :spec
+
+task test: [:rubocop, :spec]
+task default: :test

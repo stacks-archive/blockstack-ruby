@@ -34,7 +34,7 @@ the [OmniAuth Blockstack strategy](https://github.com/blockstack/omniauth-blocks
 ### To verify an auth response
 
 ```ruby
-require "blockstack"
+require 'blockstack'
 
 begin
   auth_response = request.params['authResponse']

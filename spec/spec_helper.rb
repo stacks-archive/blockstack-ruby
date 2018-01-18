@@ -7,6 +7,7 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
 end
 
-RSpec.configure do |config|
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
+RSpec.configure do |config|
 end
