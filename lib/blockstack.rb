@@ -100,8 +100,6 @@ module Blockstack
     decentralized_id.split(':')[2]
   end
 
-  protected
-
   def self.public_keys_match_issuer?(decoded_token)
     public_keys = decoded_token['public_keys']
     address_from_issuer = get_address_from_did(decoded_token['iss'])
@@ -132,8 +130,6 @@ module Blockstack
     connection.headers[:user_agent] = USER_AGENT
     connection
   end
-
-  private
 
   @leeway = DEFAULT_LEEWAY
   @valid_within = DEFAULT_VALID_WITHIN
