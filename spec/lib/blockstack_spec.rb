@@ -6,14 +6,14 @@ describe Blockstack, :vcr => { :cassette_name => "blockstack", :record => :new_e
 
 	context "configuring api settings" do
 		it "should have a default blockstack api url" do
-			expect(Blockstack.api).to eq("http://localhost:6270")
+			expect(Blockstack.api).to eq("https://core.blockstack.org")
 		end
 
 		it "should change the blockstack api url and reset to default" do
 			Blockstack.api = "https://api.blockstack.org"
 			expect(Blockstack.api).to eq("https://api.blockstack.org")
 			Blockstack.api = nil
-			expect(Blockstack.api).to eq("http://localhost:6270")
+			expect(Blockstack.api).to eq("https://core.blockstack.org")
 		end
 
 		it "should have a default leeway" do
