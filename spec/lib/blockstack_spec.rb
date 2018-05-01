@@ -4,16 +4,26 @@ require 'bitcoin'
 describe Blockstack, vcr: { cassette_name: 'blockstack', record: :new_episodes } do
 	ENCODED_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJqdGkiOiI0YmJlOGQ5NS03NzJmLTRjNDYtYTQ3Yi1mZjY4NDNjNTNjYWQiLCJpYXQiOjE0ODk1MTE1MzksImV4cCI6MTQ5MjE4OTkzOSwiaXNzIjoiZGlkOmJ0Yy1hZGRyOjFFWHdyejJFM1d2eGhkZVJCMUFyS3RkRTVOS3RLQzdFZHgiLCJwdWJsaWNLZXlzIjpbIjAzMTY1NTliZDBlNDk4ZGEzZjQyZjZiZjAzNGNiNWNjY2NlOTUzMmY2ZWIyNzYxMGE2OWIxNmExNTBmMjY4OTZlZiJdLCJwcm9maWxlIjp7IkB0eXBlIjoiUGVyc29uIiwiQGNvbnRleHQiOiJodHRwOi8vc2NoZW1hLm9yZyIsImdpdmVuTmFtZSI6ImhpIiwiZmFtaWx5TmFtZSI6Im9rIiwiaW1hZ2UiOlt7IkB0eXBlIjoiSW1hZ2VPYmplY3QiLCJuYW1lIjoiYXZhdGFyIiwiY29udGVudFVybCI6IiJ9LHsiQHR5cGUiOiJJbWFnZU9iamVjdCIsIm5hbWUiOiJhdmF0YXIiLCJjb250ZW50VXJsIjoiaHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9jMGcyd2d5dWdkd3AydHovYXZhdGFyLTE_ZGw9MSJ9XX0sInVzZXJuYW1lIjoiZGV2bmFtZTIuaWQifQ.RUjwQcf8Irpjk9ZrcfoaQv7h-P8iBwmaf4TX5fqFJOHCUi2GrMth3R6J359cKtOujqHqUByQY6LWPEdMNY06CA'
 
+<<<<<<< HEAD
 	context 'configuring api settings' do
 		it 'should have a default blockstack api url' do
 			expect(Blockstack.api).to eq('http://localhost:6270')
+=======
+	context "configuring api settings" do
+		it "should have a default blockstack api url" do
+			expect(Blockstack.api).to eq("https://core.blockstack.org")
+>>>>>>> develop
 		end
 
 		it 'should change the blockstack api url and reset to default' do
 			Blockstack.api = 'https://api.blockstack.org'
 			expect(Blockstack.api).to eq('https://api.blockstack.org')
 			Blockstack.api = nil
+<<<<<<< HEAD
 			expect(Blockstack.api).to eq('http://localhost:6270')
+=======
+			expect(Blockstack.api).to eq("https://core.blockstack.org")
+>>>>>>> develop
 		end
 
 		it 'should have a default leeway' do

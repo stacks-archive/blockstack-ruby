@@ -1,3 +1,3 @@
 module Blockstack
-  VERSION = '0.6.0'
+    VERSION = "7.0.0"
 end
