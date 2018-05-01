@@ -13,7 +13,7 @@ module Blockstack
 
     DEFAULT_LEEWAY = 30 # seconds
     DEFAULT_VALID_WITHIN = 30 # seconds
-    DEFAULT_API = "http://localhost:6270"
+    DEFAULT_API = "https://core.blockstack.org"
 
     def self.api=(api)
       @@api = api.nil? ? DEFAULT_API : api
