@@ -49,7 +49,7 @@ module Blockstack
   end
 
   # decode & verify signature
-  def self.verify_with_signature(auth_token)
+  def self.verify_with_signature(auth_token, public_keys)
     compressed_hex_public_key = public_keys[0]
     bignum = OpenSSL::BN.new(compressed_hex_public_key, 16)
     group = OpenSSL::PKey::EC::Group.new 'secp256k1'
@@ -74,7 +74,7 @@ module Blockstack
     public_keys = decoded_token['public_keys']
     fail InvalidAuthResponse.new('Invalid public_keys array: only 1 key is supported') unless public_keys.length == 1
 
-    decoded_token = verify_with_signature(auth_token)
+    decoded_token = verify_with_signature(auth_token, public_keys)
     fail InvalidAuthResponse.new("Public keys don't match issuer address") unless self.public_keys_match_issuer?(decoded_token)
     fail InvalidAuthResponse.new("Public keys don't match owner of claimed username") unless self.public_keys_match_username?(decoded_token)
 
